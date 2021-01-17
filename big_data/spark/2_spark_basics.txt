@@ -1,0 +1,21 @@
+
+░██████╗░██╗░░░██╗██╗░█████╗░██╗░░██╗  ███╗░░██╗░█████╗░████████╗███████╗░██████╗
+██╔═══██╗██║░░░██║██║██╔══██╗██║░██╔╝  ████╗░██║██╔══██╗╚══██╔══╝██╔════╝██╔════╝
+██║██╗██║██║░░░██║██║██║░░╚═╝█████═╝░  ██╔██╗██║██║░░██║░░░██║░░░█████╗░░╚█████╗░
+╚██████╔╝██║░░░██║██║██║░░██╗██╔═██╗░  ██║╚████║██║░░██║░░░██║░░░██╔══╝░░░╚═══██╗
+░╚═██╔═╝░╚██████╔╝██║╚█████╔╝██║░╚██╗  ██║░╚███║╚█████╔╝░░░██║░░░███████╗██████╔╝
+░░░╚═╝░░░░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝  ╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░╚══════╝╚═════╝░
+
+---------------------------------------------------------------------------------------------
+Index for navigation :
+part1 = dataframes
+part2 = 
+
+----------------------------------------------------------------------------------------------
+part1 = dataframes
+Dataframe consists rows,columns and 'schema'-which has information abour column names and thier types.
+Datarame uses structured API
+Some of the other core abstractions of spark are Dataset,table,RDD all of which are distributed.
+Partition is a collection of rows that sit on one physical machine in the cluster.
+The default number of partitions in spark is 200.
+min(num: of partitions,num: of executors) is the number of parallel operations possible.

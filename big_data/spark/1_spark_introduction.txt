@@ -1,0 +1,33 @@
+
+░██████╗░██╗░░░██╗██╗░█████╗░██╗░░██╗  ███╗░░██╗░█████╗░████████╗███████╗░██████╗
+██╔═══██╗██║░░░██║██║██╔══██╗██║░██╔╝  ████╗░██║██╔══██╗╚══██╔══╝██╔════╝██╔════╝
+██║██╗██║██║░░░██║██║██║░░╚═╝█████═╝░  ██╔██╗██║██║░░██║░░░██║░░░█████╗░░╚█████╗░
+╚██████╔╝██║░░░██║██║██║░░██╗██╔═██╗░  ██║╚████║██║░░██║░░░██║░░░██╔══╝░░░╚═══██╗
+░╚═██╔═╝░╚██████╔╝██║╚█████╔╝██║░╚██╗  ██║░╚███║╚█████╔╝░░░██║░░░███████╗██████╔╝
+░░░╚═╝░░░░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝  ╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░╚══════╝╚═════╝░
+
+---------------------------------------------------------------------------------------------
+Index for navigation :
+part1 = definition and description of spark
+part2 = practically speaking why and how spark ?
+
+----------------------------------------------------------------------------------------------
+part1 = definition and description of spark
+
+apache spark is a software framework used for parallel data processing on computer clusters.
+driver process -1)maintaining information about spark application
+                2)responding to user's input and maintaining executors
+executor process -1)executing the jobs assigned
+                  2)reporting back to driver process
+cluster manager like spark_standalone,yarn,mesos,etc keeps track of resources.
+spark-session is a driver process through which spark application is controlled.
+-----------------------------------------------------------------------------------------------
+part2 = practically speaking why and how spark ?
+
+The development of hardware processors hit a bottle neck dissipating heat produced.
+So having 1x 8GHz processor is significantly costlier than 2x 4GHz processors.
+The solution is distributed and parallel computing.(almost all big data tech works this way)
+Apache spark is the defacto option for advanced big data computations as it's quite stable
+and has active development support.(for now)
+----------------------------------------------------------------------------------------------
+
