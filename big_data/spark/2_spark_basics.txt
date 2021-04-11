@@ -12,10 +12,119 @@ part1 = dataframes
 part2 = 
 
 ----------------------------------------------------------------------------------------------
-part1 = dataframes
-Dataframe consists rows,columns and 'schema'-which has information abour column names and thier types.
+part2 = dataframes
+
+Dataframe consists rows,columns and 'schema'-which has information about column names and thier types.
 Datarame uses structured API
 Some of the other core abstractions of spark are Dataset,table,RDD all of which are distributed.
 Partition is a collection of rows that sit on one physical machine in the cluster.
 The default number of partitions in spark is 200.
 min(num: of partitions,num: of executors) is the number of parallel operations possible.
+------------------------------------------------------------------------------------------------
+part3 = dataframes with examples
+
+scala equivalent of <from pyspark.sql.types import *> is
+<import org.apache.spark.sql.types._>
+Creating a schema for dataframe (List and Array are scala internal functions)  :
+<import org.apache.spark.sql.types._
+val schema=StructType(List(StructField("col1",StringType,true,Metadata.fromJson("{\"hello\":\"world\"}"))))
+val schema=StructType(Array(StructField("col1",StringType,true)))
+val schema=StructType(List(StructField("col1",StringType,true)))
+>
+in python
+<from pyspark.sql.types import *
+schema=StructType([(StructField("col1",StringType,"true",Metadata={"hello":"world"}))])
+schema=StructType([(StructField("col1",StringType,"true"))])
+>
+How does general spark submit process work ?
+1) submit spark application
+2) if valid spark generates logical plan
+3) transform logical plan to physical plan (also uses catalyst optimisation)
+4) execute physical plans ( RDD manipulation)
+user_code ==> unresolved logical plan ==> catalog(check existance and analyse columns and tables referred)
+==>resolved logical plan ==> catalyst optimiser ==> optimised logical plan ==> physical plan or spark plan
+(generates different execution stratetigies and selects one of them based on a cost model) ==>
+series of rdd transformations
+columns:
+columns are just logical constructions that represent values computed on a per record basis by means of
+an expression on a dataframe
+Expression is a set of transformers on a dataframe.
+Row:
+a row object is internally represented as an array of bytes.
+dataframe is a collection of rows with schema information.
+row objects do not have schema.
+Creating and accessing rows:
+<
+import org.apache.spark.sql.Row
+val myrow = Row("Hello",null,1,false)
+println(myrow.getString(0))
+println(myrow.getInt(2))
+>
+in python < myrow = Row("Hello",none,1,False) ; print(myrow[0]) ; print(myrow[1]) ; >
+
+creating a view from a dataframe
+df.createOrReplaceTempView("dftable")
+
+create a dataframe
+<
+import org.apache.spark.sql.Row
+import org.apache.spark.sql.types.{StructField,StructType,LongType}
+val myschema = new StructType(Array(
+    new StructField("col1",LongType,false),
+    new StructField("col2",LongType,true)
+))
+val myrows = Seq(Row(1,null))
+val myrdd = spark.sparkContext.parallelize(myrows)
+val mydf = saprk.createDataFrame(myrdd,myschema)
+# alternatively (unsafe)
+mydf = Seq((1,2)).toDF("col1","col2")
+# pyspark
+myrdd = spark.sparkContext.parallelize([Row(1,None)])
+mydf = spark.createDataFrame([Row(1,None)],mySchema)
+mydf = myrdd.toDF(myschema)
+
+methods of selecting columns
+<
+df.select(
+    df.col("col1"),
+    col("col1"),
+    column("col1"),
+    'col1,
+    $"col1",
+    expr("col1")
+).show()
+>
+for column names with special characters use back tick
+df.select(expr("`This long column-name`"))
+
+random numbers :
+< df.sample(withReplacement=false,fraction=0.5,seed=4) >
+random split :
+< df.randomsplit(Array(0.25,0.75),seed=4) >
+# if array not adding upto 1 spark normalizes it to get to 1
+
+sorting rows :
+df.orderBy(F.col("col1").asc_nulls_first())
+(or)
+df.orderBy(F.col("col2").desc_nulls_last())
+(or)
+also df.sortWithinPartitions("col1")
+
+repartition and coalesce :
+repartition will incur a full shuffle of the data, regardless of whether one is 
+required or not.
+df.rdd.getNumPartitions
+df.repartition(5,F.col("col1")).coalesce(2)
+coalesce will not incur a full shuffle and will try to combine partitions
+
+collecting rows to drivers
+df.take(5) .show() .show(5,false) .collect() .toLocalIterator()
+
+
+
+
+
+
+
+
+
