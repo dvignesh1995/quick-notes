@@ -12,7 +12,8 @@ This text contains notes for learning hindi
 ------------------------------------------------------------------------------------------------------------------
 Index for navigation :
 part1 = question words
-part2 = hindi phrases
+part2 = other words
+part3 = hindi phrases
 
 ------------------------------------------------------------------------------------------------------------------
 
@@ -27,21 +28,28 @@ aap           | you
 kon           | who
 meh           | me
 konsa         | which
-mera          | my
 kis           | which
+mera          | my
 hamko / mujhe | to me
 kisko         | to whom
 apna          | yours / ours
 kitna         | how much
+kaise         | how
 tumara / tera | your
 kyu           | why
 eh            | this / this person
 oh            | that / that person
-kaise         | how
 kise          | from whom
 kitherse      | from where
 kiska         | whose(male)
 kiske         | whose(female)
+
+------------------------------------------------------------------------------------------------------------------
+
+part2 = other words
+
+naam          | name
+saar          | year
 
 ------------------------------------------------------------------------------------------------------------------
 
